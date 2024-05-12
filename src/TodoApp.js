@@ -1,49 +1,52 @@
 import React, { useState } from 'react';
 
 function TodoApp() {
-    // State to store the list of tasks
     const [tasks, setTasks] = useState([]);
-    // State to store the input value
     const [taskInput, setTaskInput] = useState('');
+    const [editTaskId, setEditTaskId] = useState(null);
 
-    // Function to add a new task
     const addTask = () => {
         if (taskInput.trim() !== '') {
-            setTasks([...tasks, { id: Date.now(), text: taskInput }]);
+            if (editTaskId !== null) {
+                // Update existing task
+                const updatedTasks = tasks.map(task =>
+                    task.id === editTaskId ? { ...task, text: taskInput } : task
+                );
+                setTasks(updatedTasks);
+                setEditTaskId(null);
+            } else {
+                // Add new task
+                setTasks([...tasks, { id: Date.now(), text: taskInput }]);
+            }
             setTaskInput('');
         }
     };
 
-    // Function to delete a task
     const deleteTask = (taskId) => {
         setTasks(tasks.filter(task => task.id !== taskId));
     };
 
-    // Function to handle task input change
-    const handleInputChange = (event) => {
-        setTaskInput(event.target.value);
+    const editTask = (taskId, taskText) => {
+        setTaskInput(taskText);
+        setEditTaskId(taskId);
     };
 
     return (
         <div>
             <h1>To-Do List</h1>
-            {/* Input field to add a new task */}
             <input
                 type="text"
                 placeholder="Enter a task"
                 value={taskInput}
-                onChange={handleInputChange} // React event handling
+                onChange={(e) => setTaskInput(e.target.value)}
             />
-            {/* Button to add a new task */}
-            <button onClick={addTask}>Add Task</button>
-            {/* List of tasks */}
+            <button onClick={addTask}>{editTaskId !== null ? 'Edit Task' : 'Add Task'}</button>
             <ul>
                 {tasks.map(task => (
                     <li key={task.id}>
-                        {/* Display task text */}
                         {task.text}
-                        {/* Button to delete a task */}
                         <button onClick={() => deleteTask(task.id)}>Delete</button>
+                        <button onClick={() => editTask(task.id, task.text)}>Edit</button>
                     </li>
                 ))}
             </ul>
