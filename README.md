@@ -34,7 +34,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 # Task CreateToDoList
-# React Key Ideas:
+# React Key Concepts:
 
 - **Component-based architecture:** React organizes UI into reusable components. In this code, `TodoApp` is a functional component that represents the entire To-Do list application. It encapsulates the UI elements and logic required for the application's functionality.
 
@@ -42,7 +42,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 - **Virtual DOM:** React uses a virtual DOM to optimize rendering performance. When state changes, React efficiently updates the virtual DOM and reconciles it with the actual DOM. This helps minimize unnecessary DOM manipulations and improves overall performance.
 
-# JavaScript Ideas:
+# JavaScript Concepts:
 
 - **Functions and variables:** JavaScript functions and variables are used extensively throughout the code to define behavior and store data. For example, `useState` is a function used to create state variables, and `tasks`, `taskInput`, and `editTaskId` are variables that hold task data and input values.
 
